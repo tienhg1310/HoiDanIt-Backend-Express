@@ -18,8 +18,18 @@ const getHome = (req, res) => {
 };
 
 const postCreateUser = (req, res) => {
-  console.log('>>> req body= ', req.body);
-  res.send('created user!');
+  let { email, myname, city } = req.body;
+  console.log('Body = ', email, myname, city);
+
+  connection.query(
+    ` INSERT INTO Users  ( email, name, city) 
+      VALUES (?, ?, ?)`,
+    [email, myname, city],
+    function (err, results) {
+      console.log(results);
+      res.send('created user!');
+    }
+  );
 };
 
 module.exports = { getHomePage, getName, getHome, postCreateUser };
