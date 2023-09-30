@@ -77,3 +77,7 @@ td {
 tr:hover {
   background-color: rgb(178, 178, 178);
 }
+
+.d-none {
+  display: none;
+}

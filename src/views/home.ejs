@@ -30,7 +30,13 @@
           <td><%= user.city %></td>
           <td>
             <a href="/update/<%= user.id %>">Edit</a>
-            <button>Delete</button>
+            <form
+              action="/delete/<%= user.id %>"
+              method="GET"
+              style="display: inline"
+            >
+              <button>Delete</button>
+            </form>
           </td>
         </tr>
         <% }); %>.
