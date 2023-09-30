@@ -48,3 +48,32 @@ button {
   margin: 10px;
   cursor: pointer;
 }
+
+.table-container {
+  padding: 15px 20px;
+}
+.table-container > .title {
+  font-size: 25px;
+  font-weight: 600;
+  padding-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+}
+th {
+  background-color: gray;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: rgb(178, 178, 178);
+}
