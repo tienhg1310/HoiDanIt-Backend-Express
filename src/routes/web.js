@@ -9,8 +9,9 @@ const router = express.Router();
 
 // khai bao route
 router.get('/', getHomePage);
+
 router.get('/create', getCreatePage);
-router.get('/update', getUpdatePage);
+router.get('/update/:userId', getUpdatePage);
 
 router.post('/create-user', postCreateUser);
 
