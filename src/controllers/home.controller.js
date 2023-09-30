@@ -17,4 +17,9 @@ const getHome = (req, res) => {
   res.render('sample.ejs');
 };
 
-module.exports = { getHomePage, getName, getHome };
+const postCreateUser = (req, res) => {
+  console.log('>>> req body= ', req.body);
+  res.send('created user!');
+};
+
+module.exports = { getHomePage, getName, getHome, postCreateUser };

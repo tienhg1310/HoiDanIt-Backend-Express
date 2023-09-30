@@ -35,7 +35,7 @@
 }
 
 .form-add-new {
-  width: 500px;
+  width: 300px;
   margin: 0 auto;
   padding-top: 100px;
 }
@@ -44,6 +44,7 @@
   padding: 10px;
 }
 button {
+  text-align: center;
   margin: 10px;
   cursor: pointer;
 }

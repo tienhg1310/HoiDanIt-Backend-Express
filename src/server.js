@@ -8,15 +8,15 @@ const app = express();
 const port = process.env.PORT || 8888;
 const hostname = process.env.HOST_NAME;
 
+// config res.body
+app.use(express.json()); // for json
+app.use(express.urlencoded({ extended: true })); // for form data
+
 // config template engine and static file
 configVewEngineAndStaticFile(app);
 
 // khai bao route
 app.use('/', webRoute);
-
-// test connection
-
-// simple query
 
 app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`);
