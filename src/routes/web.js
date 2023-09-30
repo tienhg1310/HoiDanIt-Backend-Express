@@ -7,7 +7,7 @@ const {
 const router = express.Router();
 
 // khai bao route
-router.get('/', getHomePage);
+router.get('/home', getHomePage);
 router.get('/hello', getHome);
 router.get('/tienhg2001', getName);
 
