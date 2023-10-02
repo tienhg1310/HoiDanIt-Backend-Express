@@ -9,7 +9,7 @@ const {
 const User = require('../models/User.js');
 
 const getHomePage = async (req, res) => {
-  let results = [];
+  let results = await User.find({});
   return res.render('home.ejs', { listUsers: results });
 };
 // create user
@@ -32,26 +32,25 @@ const postCreateUser = async (req, res) => {
 // update user
 const getUpdatePage = async (req, res) => {
   const userId = req.params.userId;
-  const user = await getUserById(userId);
+  const user = await User.findById(userId).exec();
 
   res.render('update.ejs', { user: user, userId: userId });
 };
 
 const postUpdateUser = async (req, res) => {
   let { email, myname, city, userId } = req.body;
-  const userEdit = { email, myname, city, userId };
-  await updateUserById(userEdit);
+  await User.updateOne({ _id: userId }, { email, name: myname, city });
   res.redirect('/');
 };
 
 // delete user
 const getDeletePage = async (req, res) => {
   const userId = req.params.userId;
-  const user = await getUserById(userId);
+  const user = await User.findOne({ _id: userId });
   res.render('delete.ejs', { user, userId });
 };
 const postDeleteUser = async (req, res) => {
-  await deleteUserById(req.body.userId);
+  await User.deleteOne({ _id: req.body.userId });
   res.redirect('/');
 };
 
