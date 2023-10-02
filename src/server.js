@@ -18,6 +18,14 @@ configVewEngineAndStaticFile(app);
 // khai bao route
 app.use('/', webRoute);
 
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+// xu li dong bo connect db sau do moi chay server
+(async () => {
+  try {
+    await connection();
+    app.listen(port, hostname, () => {
+      console.log(`Example app listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log('error');
+  }
+})();
