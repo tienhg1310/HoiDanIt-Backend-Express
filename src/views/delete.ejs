@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Delete User</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="/">Home</a>
+      <a class="active" href="/create">Delete User</a>
+    </div>
+    <% if (Object.keys(user).length !== 0) { %>
+    <div class="form-add-new">
+      <form action="/delete-user" method="POST">
+        <fieldset>
+          <legend>Update a user</legend>
+          <div class="input-group d-none">
+            <label for="">ID:</label>
+            <input name="userId" type="text" value="<%= user.id %>" />
+          </div>
+          <div class="input-group">
+            <label for="">Delete user with email?</label>
+            <input name="email" type="text" value="<%= user.email %>" />
+          </div>
+
+          <div>
+            <button>Confirm</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <% } else {%>
+    <div>Cant find user with id: <%= userId %></div>
+    <% } %>
+  </body>
+</html>
