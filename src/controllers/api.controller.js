@@ -1,5 +1,5 @@
-const User = require('../models/User.js');
-
+const User = require('../models/user.model.js');
+const { uploadSingleFile } = require('../services/file.service');
 const getUsersAPI = async (req, res) => {
   let results = await User.find({});
   return res.status(200).json({
@@ -41,9 +41,22 @@ const DeleteUserAPI = async (req, res) => {
     payload: ResponseData,
   });
 };
+
+const postUploadSingleFileAPI = async (req, res) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send('No file were Upload!!!');
+  }
+  let results = await uploadSingleFile(req.files.image);
+  console.log('>>>Check result', results);
+  return res.send({
+    EC: 0,
+    data: results,
+  });
+};
 module.exports = {
   getUsersAPI,
   CreateUserAPI,
   UpdateUserAPI,
   DeleteUserAPI,
+  postUploadSingleFileAPI,
 };
