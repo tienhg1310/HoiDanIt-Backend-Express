@@ -15,6 +15,8 @@ const createCustomerService = async (customerData) => {
     return error;
   }
 };
+const aqp = require('api-query-params');
+
 const createArrayCustomerService = async (customerData) => {
   try {
     let result = await Customer.insertMany(customerData);
@@ -25,9 +27,19 @@ const createArrayCustomerService = async (customerData) => {
   }
 };
 
-const getAllCustomerService = async () => {
+const getAllCustomerService = async (limit, page, name, queryString) => {
   try {
-    let result = await Customer.find({});
+    let result = null;
+    if (limit && page) {
+      let offset = (page - 1) * limit;
+      const { filter } = aqp(queryString);
+      delete filter.page;
+      console.log('check filter: ', filter);
+
+      result = await Customer.find(filter).skip(offset).limit(limit).exec();
+    } else {
+      result = await Customer.find({});
+    }
     return result;
   } catch (error) {
     return error;
@@ -47,7 +59,16 @@ const postUpdateCustomerService = async (id, name, email, address) => {
 
 const deleteACustomerService = async (id) => {
   try {
-    let result = await Customer.deleteById(id);
+    let result = await Customer.findByTien();
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+const deleteArrayCustomerService = async (ids) => {
+  try {
+    let result = await Customer.delete({ _id: { $in: ids } });
     return result;
   } catch (error) {
     return error;
@@ -60,4 +81,5 @@ module.exports = {
   getAllCustomerService,
   postUpdateCustomerService,
   deleteACustomerService,
+  deleteArrayCustomerService,
 };

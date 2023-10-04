@@ -5,7 +5,10 @@ const {
   getAllCustomerService,
   postUpdateCustomerService,
   deleteACustomerService,
+  deleteArrayCustomerService,
 } = require('../services/customer.service.js');
+
+const aqp = require('api-query-params');
 
 module.exports = {
   postCreateCustomer: async (req, res) => {
@@ -57,17 +60,35 @@ module.exports = {
   },
 
   getAllCustomer: async (req, res) => {
-    try {
-      let result = await getAllCustomerService();
-      return res.status(200).json({
-        EC: 0,
-        data: result,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        EC: 1,
-        data: error,
-      });
+    let { limit, page, name } = req.query;
+    console.log({ limit, page, name });
+    let result;
+    if (limit && page) {
+      try {
+        result = await getAllCustomerService(limit, page, name, req.query);
+        return res.status(200).json({
+          EC: 0,
+          data: result,
+        });
+      } catch (error) {
+        return res.status(400).json({
+          EC: 1,
+          data: error,
+        });
+      }
+    } else {
+      try {
+        result = await getAllCustomerService();
+        return res.status(200).json({
+          EC: 0,
+          data: result,
+        });
+      } catch (error) {
+        return res.status(400).json({
+          EC: 1,
+          data: error,
+        });
+      }
     }
   },
   postUpdateCustomer: async (req, res) => {
@@ -89,6 +110,22 @@ module.exports = {
   deleteACustomer: async (req, res) => {
     try {
       let result = await deleteACustomerService(req.body.id);
+      return res.status(200).json({
+        EC: 0,
+        data: result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        EC: 1,
+        data: error,
+      });
+    }
+  },
+  deleteArrayCustomer: async (req, res) => {
+    let ids = req.body.customersId;
+    console.log(ids);
+    try {
+      let result = await deleteArrayCustomerService(ids);
       return res.status(200).json({
         EC: 0,
         data: result,
