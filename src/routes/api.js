@@ -20,6 +20,12 @@ const {
   deleteProject,
   updateProject,
 } = require('../controllers/project.controller.js');
+const {
+  postCreateTask,
+  getAllTask,
+  updateTask,
+  deleteTask,
+} = require('../controllers/task.controller.js');
 
 const routerAPI = express.Router();
 
@@ -41,6 +47,11 @@ routerAPI.post('/projects', postCreateProject);
 routerAPI.get('/projects', getAllProject);
 routerAPI.put('/projects', updateProject);
 routerAPI.delete('/projects', deleteProject);
+
+routerAPI.post('/tasks', postCreateTask);
+routerAPI.get('/tasks', getAllTask);
+routerAPI.put('/tasks', updateTask);
+routerAPI.delete('/tasks', deleteTask);
 
 routerAPI.get('/info', (req, res) => {
   return res.status(200).json({
