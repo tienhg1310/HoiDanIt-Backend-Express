@@ -12,7 +12,21 @@ const createProjectService = async (data) => {
       for (let i = 0; i < data.usersArr.length; i++) {
         myProject.usersInfor.push(data.usersArr[i]);
       }
-      const newResult = await myProject.save();
+      let newResult = await myProject.save();
+      console.log({ newResult });
+      return newResult;
+    }
+    if (data.type === 'ADD-TASK') {
+      let myProjects = await Project.findById(data.projectId).exec();
+      console.log(myProjects);
+      for (let i = 0; i < data.tasksArr.length; i++) {
+        console.log('lap lan ', i);
+        myProjects.tasks.push(data.tasksArr[i]);
+        console.log(myProjects);
+      }
+
+      let newResult = await myProjects.save();
+
       return newResult;
     }
     if (data.type === 'REMOVE-USER') {
@@ -34,6 +48,7 @@ const getAllProjectService = async (data) => {
   const page = data.page;
   const { filter, limit, population } = aqp(data);
   delete filter.page;
+  console.log(population);
 
   let offset = (page - 1) * limit;
 

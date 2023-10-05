@@ -18,16 +18,12 @@ const getAllTaskService = async (data) => {
     let result;
 
     const page = data.page;
-    const { filter, limit, population } = aqp(data);
+    const { filter, limit } = aqp(data);
     delete filter.page;
 
     let offset = (page - 1) * limit;
 
-    result = await Task.find(filter)
-      .polulate(population)
-      .skip(offset)
-      .limit(limit)
-      .exec();
+    result = await Task.find(filter).skip(offset).limit(limit).exec();
 
     return result;
   } catch (error) {

@@ -7,7 +7,6 @@ const {
 
 module.exports = {
   postCreateProject: async (req, res) => {
-    console.log('req body: ', req.body);
     try {
       let result = await createProjectService(req.body);
       return res.status(200).json({
