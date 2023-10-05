@@ -27,15 +27,13 @@ const createArrayCustomerService = async (customerData) => {
   }
 };
 
-const getAllCustomerService = async (limit, page, name, queryString) => {
+const getAllCustomerService = async (page, queryString) => {
+  const { filter, limit } = aqp(queryString);
+  let result = null;
   try {
-    let result = null;
     if (limit && page) {
       let offset = (page - 1) * limit;
-      const { filter } = aqp(queryString);
       delete filter.page;
-      console.log('check filter: ', filter);
-
       result = await Customer.find(filter).skip(offset).limit(limit).exec();
     } else {
       result = await Customer.find({});

@@ -14,6 +14,12 @@ const {
   deleteACustomer,
   deleteArrayCustomer,
 } = require('../controllers/customer.controller.js');
+const {
+  postCreateProject,
+  getAllProject,
+  deleteProject,
+  updateProject,
+} = require('../controllers/project.controller.js');
 
 const routerAPI = express.Router();
 
@@ -30,6 +36,11 @@ routerAPI.post('/customers-many', postCreateArrayCustomer);
 routerAPI.put('/customers', postUpdateCustomer);
 routerAPI.delete('/customers', deleteACustomer);
 routerAPI.delete('/customers-many', deleteArrayCustomer);
+
+routerAPI.post('/projects', postCreateProject);
+routerAPI.get('/projects', getAllProject);
+routerAPI.put('/projects', updateProject);
+routerAPI.delete('/projects', deleteProject);
 
 routerAPI.get('/info', (req, res) => {
   return res.status(200).json({
