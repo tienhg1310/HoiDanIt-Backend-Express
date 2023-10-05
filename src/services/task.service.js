@@ -1,5 +1,6 @@
 const Task = require('../models/task.model');
 const aqp = require('api-query-params');
+
 const createTaskService = async (data) => {
   try {
     if (data.type === 'EMPTY-TASK') {
@@ -35,7 +36,6 @@ const getAllTaskService = async (data) => {
 };
 
 const updateTaskService = async (data) => {
-  console.log(data);
   try {
     let result = await Task.updateOne({ _id: data.id }, { ...data });
 
@@ -45,7 +45,6 @@ const updateTaskService = async (data) => {
   }
 };
 const deleteTaskService = async (data) => {
-  console.log(data);
   try {
     let result = await Task.deleteById(data.id);
 
