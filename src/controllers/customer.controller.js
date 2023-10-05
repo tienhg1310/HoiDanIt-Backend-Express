@@ -16,17 +16,6 @@ module.exports = {
     let { name, address, phone, email, description } = req.body;
     let imageUrl = '';
 
-    const schema = Joi.object({
-      name: Joi.string().alphanum().min(3).max(30).required(),
-      address: Joi.string(),
-      phone: Joi.string().pattern(new RegExp('^[0-9]{3,30}$')),
-      email: Joi.string().email({ minDomainSegments: 2 }),
-      description: Joi.string(),
-    });
-
-    const result = schema.validate(req.data, { abortEarly: false });
-    console.log('check result', result);
-
     if (!req.files || Object.keys(req.files).length === 0) {
       // do nothing
       console.log('file not oke');
